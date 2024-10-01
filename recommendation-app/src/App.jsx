@@ -1,17 +1,15 @@
 import React from 'react';
-import MovieRecommendation from 'MovieList.jsx';
+import MovieRecommendation from './MovieList.jsx';
 // import './MovieList.css';
 
 function App() {
   return (
     <>
-       <div className="App">
+    <div className="App">
       <MovieRecommendation />
     </div>
     </>
   );
-   
- 
 }
 
 export default App;

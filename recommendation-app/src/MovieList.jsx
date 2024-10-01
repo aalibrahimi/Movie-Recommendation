@@ -23,8 +23,6 @@ const MovieRecommendation = () => {
 
   return (
     <>
-
-    
     <Container className="movie-recommendation">
       <h1 className="text-center my-4">Movie Recommendations</h1>
       <Nav variant="tabs" className="justify-content-center mb-4">
@@ -71,7 +69,6 @@ const MovieRecommendation = () => {
     </Container>
     </>
   );
-  
 };
 
 export default MovieRecommendation;
