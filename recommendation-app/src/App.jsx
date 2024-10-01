@@ -1,13 +1,11 @@
 import React from 'react';
 import MovieRecommendation from './MovieList.jsx';
-// import './MovieList.css';
 
-function App() {
+function App()
+{
   return (
     <>
-    <div className="App">
       <MovieRecommendation />
-    </div>
     </>
   );
 }
