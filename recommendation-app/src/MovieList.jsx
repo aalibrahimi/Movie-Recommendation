@@ -5,21 +5,23 @@ const MovieRecommendation = () => {
   const [movies, setMovies] = useState([]);
   const [activeGenre, setActiveGenre] = useState('popular');
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchMovies = async () => {
       setLoading(true);
+      setError(null);
       try {
         const response = await axios.get(`/api/movies/${activeGenre}`);
-        // Ensure the response data is an array before setting the state
         if (Array.isArray(response.data)) {
           setMovies(response.data);
         } else {
-          setMovies([]); // Set to an empty array if the response is not as expected
+          setMovies([]);
         }
       } catch (error) {
         console.error('Error fetching movies:', error);
-        setMovies([]); // In case of an error, set movies to an empty array
+        setError('Failed to load movies');
+        setMovies([]);
       } finally {
         setLoading(false);
       }
@@ -28,9 +30,12 @@ const MovieRecommendation = () => {
     fetchMovies();
   }, [activeGenre]);
 
-  // Show loading text while fetching the movies
   if (loading) {
     return <p className="text-center my-8">Loading...</p>;
+  }
+
+  if (error) {
+    return <p className="text-center my-8 text-red-500">{error}</p>;
   }
 
   return (
@@ -38,12 +43,14 @@ const MovieRecommendation = () => {
       <h1 className="text-center text-2xl font-bold my-8">Movie Recommendations</h1>
       <div className="flex justify-center mb-8 space-x-4">
         <button
+          aria-label="View popular movies"
           className={`px-4 py-2 rounded ${activeGenre === 'popular' ? 'bg-blue-600 text-white' : 'bg-gray-200'}`}
           onClick={() => setActiveGenre('popular')}
         >
           Popular
         </button>
         <button
+          aria-label="View top-rated movies"
           className={`px-4 py-2 rounded ${activeGenre === 'top_rated' ? 'bg-blue-600 text-white' : 'bg-gray-200'}`}
           onClick={() => setActiveGenre('top_rated')}
         >
